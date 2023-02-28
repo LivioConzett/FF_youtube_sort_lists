@@ -1,1 +1,3 @@
-# FF_youtube_sort_lists
+# Youtube Lists Sort
+
+This is a firefox extension to sort the youtube list alphabeticaly.  

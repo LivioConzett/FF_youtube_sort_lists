@@ -1,0 +1,33 @@
+{
+    "manifest_version":2,
+    "name":"YT Lists Sort",
+    "version":"0.1",
+
+    "description":"Sorts the list alphabeticaly in Youtube.",
+
+    "browser_action":{
+        "browser_style": true,
+        "default_icon": {
+            "48":"icon/icon.png"
+        },
+        "default_title":"YT List Sort",
+        "default_popup":"popup.html"
+    },
+
+    "content_scripts":[
+        {
+            "matches":["*://*.youtube.com/*"],
+            "js":["yt_sort.js"]
+        }
+    ],
+
+    "background":{
+        "scripts":["background.js"]
+    },
+
+    "permissions":[
+        "tabs",
+        "storage"
+    ]
+
+}
