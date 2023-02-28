@@ -12,9 +12,6 @@ let addedListener = false;
 browser.storage.onChanged.addListener((changes, area) => {
 
     if(area === 'local' && changes.value.newValue > -1) {
-
-        console.log(isOn + " : " + changes.value.newValue);
-        
         
         isOn = changes.value.newValue;
         sortList();
