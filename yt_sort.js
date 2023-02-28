@@ -4,11 +4,8 @@ let isOn = 0;
 // so that the guide-button will only add the listener once.
 let addedListener = false;
 
-// browser.runtime.onMessage.addListener(message => {
-//     if (message.videoChanged) {
-//     }
-// });
 
+// listen for when the toggle switch is changed.
 browser.storage.onChanged.addListener((changes, area) => {
 
     if(area === 'local' && changes.value.newValue > -1) {
@@ -18,6 +15,35 @@ browser.storage.onChanged.addListener((changes, area) => {
     }
 });
 
+
+window.addEventListener('load', (event) => {
+   
+    // needed since Youtube continues to load even after the load event has been
+    // triggerd
+    waitForElement("#expander-item",(e)=>{
+        console.log("found button #expander-item");
+        if(!addedListener){
+            document.querySelector("#expander-item").addEventListener("click", (e)=>{
+                sortList();
+            });
+            addedListener = true;
+        }
+    });
+
+});
+
+// wait for an element to be loaded
+function waitForElement(elementSelector, callBack){
+    let element = document.querySelector(elementSelector)
+    window.setTimeout(() => {
+      if(element){
+        callBack();
+      }else{
+        console.log(elementSelector + " not found");
+        waitForElement(elementSelector, callBack);
+      }
+    },1000)
+}
 
 // since the div where the lists are only exists after the side panel is opend,
 // we need to know when it is opened.
@@ -35,7 +61,6 @@ document.querySelector("#guide-button").addEventListener("click", (e)=>{
         addedListener = true;
     }
 });
-
 
 
 // sorts the list of playlists in the side bar.
@@ -97,10 +122,7 @@ function sortList(){
         else{
             expandableItems.appendChild(vector[1]);
         }
-        
     }
-    
-
 }
 
 // sort by the first element of the list.
@@ -127,9 +149,7 @@ async function init(){
         sortList();
 
     });
-
 }
 
 
 init();
-

@@ -17,7 +17,8 @@
     "content_scripts":[
         {
             "matches":["*://*.youtube.com/*"],
-            "js":["yt_sort.js"]
+            "js":["yt_sort.js"],
+            "run_at":"document_start"
         }
     ],
 
