@@ -4,18 +4,102 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
         <style>
+
+            :root{
+                --ON-COLOR: #de935f;
+                --OFF-COLOR: #282a2e;
+                --BG-COLOR: #1d1f21;
+                --FG-COLOR: #c5c8c6;
+                --BUTTON_COLOR: #373b41;
+                --ANIMATION-SPEED: .2s;
+            }
+
             body{
                 padding: 1em;
+                background-color: var(--BG-COLOR);
+                color: var(--FG-COLOR);
             }
             .onOff{
                 margin-left: 1em;
+                width: 3em;
+            }
+            .lab{
+                height:2em;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: .5em;
+            }
+            .toggle-button{
+                position:relative;
+                width: 3em;
+                height: 1.5em;
+                border-radius: .5em;
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+                margin-left: 1em;
+            }
+            .toggle-button .b{
+                position:absolute;
+                height: 100%;
+                width: 50%;
+                border-radius: inherit;
+                background-color: var(--BUTTON_COLOR);
+            }
+            .toggle-button .bar{
+                position: absolute;
+                height:70%;
+                width:100%;
+                border-radius: inherit;
+                z-index: -1;
+            }
+
+            .on .b{
+                animation: on var(--ANIMATION-SPEED) linear;
+                transform: translateX(100%);
+            }
+            .off .b{
+                animation: off var(--ANIMATION-SPEED) linear;
+                transform: translateX(0%);
+            }
+            .on .bar{
+                animation: color-on var(--ANIMATION-SPEED) linear;
+                background-color: var(--ON-COLOR);
+            }
+            .off .bar{
+                animation: color-off var(--ANIMATION-SPEED) linear;
+                background-color: var(--OFF-COLOR);
+            }
+
+            @keyframes on{
+                from {transform: translate(0);}
+                to{transform: translate(100%);}
+            }
+            @keyframes off{
+                from {transform: translate(100%);}
+                to {transform: translate(0);}
+            }
+
+            @keyframes color-on{
+                from{background-color: var(--OFF-COLOR);}
+                to{background-color: var(--ON-COLOR);}
+            }
+            @keyframes color-off{
+                from{background-color: var(--ON-COLOR);}
+                to{background-color: var(--OFF-COLOR);}
             }
         </style>
     </head>
     <body>
+        Youtube Sort Playlists Alphabetically
         <label class="lab">
-            sort
-            <input class="onOff" type="range" min="0" max="1" value="0" width="100">
+            <p>sort</p>
+            <!-- <input class="onOff" type="range" min="0" max="1" value="0" width="100"> -->
+            <div class="toggle-button off">
+                <div class="bar"></div>
+                <div class="b"></div>
+            </div>
         </label>
         <script src="popup.js">
         </script>

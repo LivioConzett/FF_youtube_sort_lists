@@ -1,10 +1,17 @@
 
 
-let input = document.querySelector('.onOff');
+let button = document.querySelector('.toggle-button');
+let bar = button.querySelector('.bar');
+let buttonValue = 0;
 
 
-input.addEventListener('change', (e) => {
-    setValue(e.target.value);
+button.addEventListener('click', (e) => {
+    if(buttonValue == 0){
+        buttonOn();
+    }
+    else{
+        buttonOff();
+    }
 });
 
 
@@ -19,11 +26,32 @@ async function init(){
             e.value = 0;
         }
 
-        input.value = e.value;
         setValue(e.value);
+        buttonValue = e.value;
+
+        if(buttonValue == 1){
+            buttonOn();
+        }
+        else{
+            buttonOff();
+        }
 
     });
 
+}
+
+function buttonOn(){
+    setValue(1);
+    buttonValue = 1;
+    button.classList.remove('off');
+    button.classList.add('on');
+}
+
+function buttonOff(){
+    setValue(0);
+    buttonValue = 0;
+    button.classList.remove('on');
+    button.classList.add('off');
 }
 
 init().catch( e => console.error(e));
