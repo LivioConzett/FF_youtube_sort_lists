@@ -15,10 +15,9 @@ browser.storage.onChanged.addListener((changes, area) => {
 
         console.log(isOn + " : " + changes.value.newValue);
         
-        if(isOn != changes.value.newValue){
-            sortList();
-        }
+        
         isOn = changes.value.newValue;
+        sortList();
     }
 });
 
